@@ -1,6 +1,5 @@
 <template>
   <div class="voting-item">
-    <!-- 具名插槽：展示候选人名称 -->
     <h3>
       <slot name="candidate-name"></slot>
     </h3>
@@ -24,7 +23,9 @@
 </template>
 
 <script setup>
-// 接收父组件传递的票数（props）
+import { ref } from 'vue'
+
+// 接收父组件传递的票数
 const props = defineProps({
   voteCount: {
     type: Number,
@@ -32,26 +33,29 @@ const props = defineProps({
   }
 })
 
-// 自定义事件：向父组件发送投票指令
+// 自定义事件
 const emit = defineEmits(['add-vote', 'add-weight-vote'])
 
-// 加权投票输入值
+// 加权投票输入
 const weightNum = ref(0)
 
-// 单次投票
+// 投1票
 const addOneVote = () => {
   emit('add-vote')
 }
 
-// 加权投票
+// 投指定票数 —— 已修复！
 const addWeightVote = () => {
-  // 校验票数范围 0-10
-  if (weightNum < 0 || weightNum > 10) {
-    alert('请输入0-10之间的票数！')
+  // 必须用 .value
+  if (weightNum.value < 0 || weightNum.value > 10) {
+    alert('请输入 0~10 之间的票数！')
     return
   }
-  emit('add-weight-vote', weightNum)
-  // 投票后清空输入框
+
+  // 必须传 .value
+  emit('add-weight-vote', weightNum.value)
+
+  // 投票后清空
   weightNum.value = 0
 }
 </script>

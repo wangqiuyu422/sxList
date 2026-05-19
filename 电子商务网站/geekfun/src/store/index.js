@@ -17,10 +17,14 @@ export const useStore = defineStore('main', {
     cart: JSON.parse(localStorage.getItem('cart')) || [],
     // 订单：从localStorage读取，默认空数组
     orders: JSON.parse(localStorage.getItem('orders')) || [],
+    // 虚拟货币余额（GeekCoin）：从localStorage读取，默认100枚
+    balance: parseInt(localStorage.getItem('balance')) || 100,
     // 模拟API加载状态
     loading: false,
     // 模拟API错误状态
-    error: null
+    error: null,
+    // 购物车侧边栏是否打开
+    cartSidebarOpen: false
   }),
   actions: {
     // 同步购物车到localStorage
@@ -30,6 +34,27 @@ export const useStore = defineStore('main', {
     // 同步订单到localStorage
     saveOrders() {
       localStorage.setItem('orders', JSON.stringify(this.orders))
+    },
+    // 同步余额到localStorage
+    saveBalance() {
+      localStorage.setItem('balance', this.balance.toString())
+    },
+    // 充值余额
+    async rechargeBalance(amount) {
+      this.loading = true
+      this.error = null
+      
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      if (Math.random() < 0.1) {
+        this.loading = false
+        this.error = '充值失败，请稍后重试'
+        throw new Error(this.error)
+      }
+      
+      this.balance += amount
+      this.saveBalance()
+      this.loading = false
     },
 
     // 模拟API：添加商品到购物车（含失败模拟）
@@ -112,7 +137,7 @@ export const useStore = defineStore('main', {
       return order
     },
 
-    // 模拟API：支付订单
+    // 模拟API：支付订单（使用虚拟货币）
     async payOrder(orderId) {
       this.loading = true
       this.error = null
@@ -120,30 +145,68 @@ export const useStore = defineStore('main', {
       // 模拟支付接口延迟
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      // 模拟15%概率支付失败
-      if (Math.random() < 0.15) {
+      const order = this.orders.find(o => o.id === orderId)
+      if (!order) {
         this.loading = false
-        this.error = '支付失败，请检查余额后重试'
+        this.error = '订单不存在'
         throw new Error(this.error)
       }
 
-      const order = this.orders.find(o => o.id === orderId)
-      if (order) {
-        order.status = '已支付'
-        this.saveOrders()
+      // 检查余额是否充足
+      if (this.balance < order.totalPrice) {
+        this.loading = false
+        this.error = `余额不足！当前余额: ${this.balance} GeekCoin，订单金额: ${order.totalPrice} GeekCoin`
+        throw new Error(this.error)
       }
+
+      // 模拟15%概率支付失败
+      if (Math.random() < 0.15) {
+        this.loading = false
+        this.error = '支付失败，请稍后重试'
+        throw new Error(this.error)
+      }
+
+      // 扣除余额
+      this.balance -= order.totalPrice
+      this.saveBalance()
+
+      // 更新订单状态
+      order.status = '已支付'
+      this.saveOrders()
 
       this.loading = false
     },
 
     // 根据ID获取订单
     getOrderById(orderId) {
-      return this.orders.find(o => o.id === orderId)
+      const targetId = String(orderId)
+      return this.orders.find(o => String(o.id) === targetId || String(o.id).replace(/^#/, '') === targetId)
     },
 
     // 根据ID获取商品
     getProductById(productId) {
       return this.products.find(p => p.id === productId)
+    },
+
+    // 打开购物车侧边栏
+    openCartSidebar() {
+      this.cartSidebarOpen = true
+      document.body.style.overflow = 'hidden'
+    },
+
+    // 关闭购物车侧边栏
+    closeCartSidebar() {
+      this.cartSidebarOpen = false
+      document.body.style.overflow = ''
+    },
+
+    // 切换购物车侧边栏
+    toggleCartSidebar() {
+      if (this.cartSidebarOpen) {
+        this.closeCartSidebar()
+      } else {
+        this.openCartSidebar()
+      }
     }
   }
 })

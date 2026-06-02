@@ -1,0 +1,41 @@
+{
+  "easy": [
+    "the", "be", "to", "of", "and", "a", "in", "that", "have", "it",
+    "for", "not", "on", "with", "he", "as", "you", "do", "at", "this",
+    "but", "his", "by", "from", "they", "we", "say", "her", "she", "or",
+    "an", "will", "my", "one", "all", "would", "there", "their", "what", "so",
+    "up", "out", "if", "about", "who", "get", "which", "go", "me", "when"
+  ],
+  "medium": [
+    "because", "through", "before", "between", "should", "under", "never", "while",
+    "during", "without", "again", "against", "little", "around", "always", "every",
+    "after", "might", "place", "great", "same", "how", "only", "own", "such",
+    "even", "still", "each", "most", "world", "where", "make", "than", "then",
+    "into", "some", "time", "good", "take", "person", "year", "way", "day", "man"
+  ],
+  "hard": [
+    "development", "environment", "organization", "performance", "technology",
+    "management", "experience", "opportunity", "relationship", "responsibility",
+    "administration", "communication", "professional", "information", "infrastructure",
+    "implementation", "collaboration", "documentation", "configuration", "architecture",
+    "authentication", "authorization", "encapsulation", "polymorphism", "inheritance",
+    "abstraction", "integration", "optimization", "refactoring", "deployment"
+  ],
+  "commonPhrases": [
+    "hello world",
+    "good morning",
+    "thank you",
+    "please help",
+    "nice to meet",
+    "have a good",
+    "see you soon",
+    "good night",
+    "how are you",
+    "what is up",
+    "I love you",
+    "happy birthday",
+    "congratulations",
+    "best wishes",
+    "good luck"
+  ]
+}

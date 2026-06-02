@@ -1,0 +1,23 @@
+{
+  "lowercase": "abcdefghijklmnopqrstuvwxyz",
+  "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "numbers": "0123456789",
+  "symbols": "!@#$%^&*()_+-=[]{}|;':\",./<>?",
+  "rows": [
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["z", "x", "c", "v", "b", "n", "m"]
+  ],
+  "practiceSets": [
+    "asdfghjkl",
+    "qwertyuiop",
+    "zxcvbnm",
+    "abcdefghijklmnopqrstuvwxyz",
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "0123456789",
+    "!@#$%^&*",
+    "qwerty asdfgh zxcvbn",
+    "the quick brown fox",
+    "jumps over the lazy dog"
+  ]
+}

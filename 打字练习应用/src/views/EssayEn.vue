@@ -82,7 +82,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import TypingBox from '../components/TypingBox.vue'
 import { useTypingStore } from '../store/typingStore'

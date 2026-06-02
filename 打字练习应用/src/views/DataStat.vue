@@ -98,8 +98,8 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
 import { db } from '../api/db'
 import type { TypingRecord } from '../api/db'

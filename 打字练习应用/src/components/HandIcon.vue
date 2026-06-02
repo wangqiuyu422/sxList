@@ -28,40 +28,11 @@
   </div>
 </template>
 
-<script setup>
-import { computed } from 'vue'
-
-const props = defineProps<{
+<script setup lang="ts">
+defineProps<{
   isLeft: boolean
   activeFinger: number | null
 }>()
-
-const fingerKeys: Record<number, string[]> = {
-  0: ['q', 'a', 'z', '1', '`'],
-  1: ['w', 's', 'x', '2'],
-  2: ['e', 'd', 'c', '3'],
-  3: ['r', 'f', 'v', 't', 'g', 'b', '4', '5'],
-  4: ['y', 'h', 'n', 'u', 'j', 'm', '6', '7']
-}
-
-const rightFingerKeys: Record<number, string[]> = {
-  0: ['y', 'h', 'n', '6', '7'],
-  1: ['u', 'j', 'm', '8'],
-  2: ['i', 'k', ',', '9'],
-  3: ['o', 'l', '.', '0'],
-  4: ['p', ';', '/', '-', '=', '[', ']']
-}
-
-const keys = computed(() => props.isLeft ? fingerKeys : rightFingerKeys)
-
-function getFingerForKey(key: string): number | null {
-  for (const [finger, keyList] of Object.entries(keys.value)) {
-    if (keyList.includes(key.toLowerCase())) {
-      return parseInt(finger)
-    }
-  }
-  return null
-}
 </script>
 
 <style scoped>

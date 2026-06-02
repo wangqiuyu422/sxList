@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted, nextTick } from 'vue'
 
 const props = defineProps<{
@@ -45,6 +45,7 @@ const props = defineProps<{
   accuracy: number
   duration: number
   currentIndex: number
+  showStats?: boolean
 }>()
 
 const emit = defineEmits<{

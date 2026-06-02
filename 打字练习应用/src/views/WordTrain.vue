@@ -93,7 +93,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import TypingBox from '../components/TypingBox.vue'
 import KeyBoard from '../components/KeyBoard.vue'
@@ -102,7 +102,7 @@ import wordData from '../data/word.json'
 
 const typingStore = useTypingStore()
 
-const difficultyLevels = [
+const difficultyLevels: { label: string; value: 'easy' | 'medium' | 'hard' | 'commonPhrases' }[] = [
   { label: '简单', value: 'easy' },
   { label: '中等', value: 'medium' },
   { label: '困难', value: 'hard' },

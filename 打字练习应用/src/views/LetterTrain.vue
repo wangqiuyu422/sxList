@@ -39,7 +39,7 @@
         class="difficulty-select"
         v-model="currentSetIndex"
       >
-        <option v-for="(set, index) in practiceSets" :key="index" :value="index">
+        <option v-for="(_set, index) in practiceSets" :key="index" :value="index">
           练习组 {{ index + 1 }}
         </option>
       </select>
@@ -84,7 +84,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import TypingBox from '../components/TypingBox.vue'
 import KeyBoard from '../components/KeyBoard.vue'

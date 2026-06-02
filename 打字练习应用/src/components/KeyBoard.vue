@@ -68,7 +68,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 
 const props = defineProps<{
@@ -84,7 +84,6 @@ const emit = defineEmits<{
 const topRow = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Back']
 const middleRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|']
 const bottomRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', '<', '>', '?']
-const lowestRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?']
 
 const pressedKeys = ref<Set<string>>(new Set())
 
